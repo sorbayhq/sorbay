@@ -1,0 +1,47 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+      - testing
+      - staging
+      - cloud
+  pull_request:
+    branches:
+      - master
+      - testing
+      - staging
+      - cloud
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: "Setup environment"
+        run: sh ./setup/setup.sh
+
+      - name: "Start database container"
+        run: docker-compose -f "docker-compose.yml" up -d db
+
+      - name: "Start app container"
+        run: docker-compose -f "docker-compose.yml" up -d --build app
+
+      - name: "Test"
+        run: docker-compose -f "docker-compose.yml" run app pytest --cov=./ --cov-report=xml
+
+  flake:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: "Setup environment"
+        run: sh ./setup/setup.sh
+
+      - name: "flake8"
+        run: docker-compose -f "docker-compose.yml" run app flake8 .

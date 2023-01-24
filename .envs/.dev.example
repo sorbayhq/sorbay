@@ -1,0 +1,40 @@
+POSTGRES_DATABASE=sorbay
+POSTGRES_USER=sorbay
+POSTGRES_PASSWORD=<CHANGE_POSTGRES_PASSWORD>
+POSTGRES_HOST=db
+
+REDIS_HOST=redis
+REDIS_DATABASE=1
+
+MINIO_ROOT_USER=admin
+MINIO_ROOT_PASSWORD=<CHANGE_MINIO_ROOT_PASSWORD>
+
+S3_ENDPOINT_URL=http://minio:9000
+S3_PUBLIC_ENDPOINT_URL=http://0.0.0.0:9000
+# S3_ACCESS_KEY and S3_SECRET_KEY are set to the MINIO admin credentials in development,
+# see ./docker/app/dev/entrypoint.sh for more.
+# If you plan on using Sorbay on a productive environment, make sure to use proper credentials.
+# S3_ACCESS_KEY=
+# S3_SECRET_KEY=
+
+DJANGO_SETTINGS_MODULE=settings.dev
+SECRET_KEY=<CHANGE_SECRET_KEY>
+DJANGO_DEBUG=True
+TIMEZONE=Europe/Berlin
+
+KC_DB=postgres
+KC_DB_URL=jdbc:postgresql://db:5432/sorbay
+KC_DB_USERNAME=sorbay
+KC_DB_PASSWORD=<CHANGE_POSTGRES_PASSWORD>
+KEYCLOAK_ADMIN=admin
+KEYCLOAK_ADMIN_PASSWORD=<CHANGE_KEYCLOAK_ADMIN_PASSWORD>
+KEYCLOAK_FRONTEND_URL=http://localhost:8080/auth
+
+OIDC_RP_CLIENT_ID=auth
+OIDC_RP_CLIENT_SECRET=<CHANGE_OIDC_RP_CLIENT_SECRET>
+OIDC_RP_SIGN_ALGO=RS256
+OIDC_OP_JWKS_ENDPOINT=http://localhost:8080/realms/dev/protocol/openid-connect/certs
+OIDC_OP_AUTHORIZATION_ENDPOINT=http://localhost:8080/realms/dev/protocol/openid-connect/auth
+OIDC_OP_TOKEN_ENDPOINT=http://localhost:8080/realms/dev/protocol/openid-connect/token
+OIDC_OP_USER_ENDPOINT=http://localhost:8080/realms/dev/protocol/openid-connect/userinfo
+OIDC_OP_LOGOUT_ENDPOINT=http://localhost:8080/realms/dev/protocol/openid-connect/logout

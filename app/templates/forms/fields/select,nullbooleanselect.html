@@ -1,0 +1,27 @@
+<div class="form-group">
+  {% if show_label %}<label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>{% endif %}
+  <select name="{{ field.html_name }}" class="form-select {% if field.errors %}is-invalid{% endif %}"
+    id="{{ field.id_for_label }}" aria-describedby="{{ field.id_for_label }}_feedback">
+    {% if field.widget_type == 'nullbooleanselect' %}
+    <option value="unknown" {% if field.value == None %}selected{% endif %}>Unbekannt</option>
+    <option value="true" {% if field.value == True %}selected{% endif %}>Ja</option>
+    <option value="false" {% if field.value == False %}selected{% endif %}>Nein</option>
+    {% else %}
+    {% for x, y in field.field.choices %}
+
+    <option value="{{ x }}" {% if field.value|add:"0" == x|add:"0" %}selected{% endif %}>
+      {{ y }}
+    </option>
+    {% endfor %}
+    {% endif %}
+  </select>
+  {% if field.errors %}
+  <div id="{{ field.id_for_label }}_feedback" class="invalid-feedback">
+    {% for error in field.errors %}{{ error }}{% endfor %}
+  </div>
+  {% elif field.help_text %}
+  <small id="{{ field.id_for_label }}_feedback" class="form-text text-muted">
+    {{ field.help_text }}
+  </small>
+  {% endif %}
+</div>

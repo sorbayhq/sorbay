@@ -1,0 +1,173 @@
+{% load static %}
+<!doctype html>
+{#* Template based on Tabler #}
+{#* @version 1.0.0-beta4 #}
+{#* @link https://tabler.io #}
+{#* Copyright 2018-2021 The Tabler Authors #}
+{#* Copyright 2018-2021 codecalm.net Paweł Kuna #}
+{#* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE) #}
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <title>{% block title %}{% endblock %} - Sorbay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="icon" href="{% static "favicon.ico" %}" type="image/x-icon"/>
+  <link rel="shortcut icon" href="{% static "favicon.ico" %}" type="image/x-icon"/>
+  <meta name="description" content="{% block meta_descr %}{% endblock %}"/>
+  <link href="{% static "css/dashboard.css" %}" rel="stylesheet"/>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+{% block body %}
+<div class="wrapper">
+  {% block wrapper %}
+    <header class="navbar navbar-expand-md navbar-light d-print-none">
+      <div class="container-xl">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+          <a href="{% url "home" %}">
+            <img src="{% static "images/logo.png" %}" width="110" height="32" alt="Gateway" class="navbar-brand-image">
+          </a>
+        </h1>
+        <div class="navbar-nav flex-row order-md-last">
+          {% if request.user.is_authenticated %}
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+              <svg xmlns="http://www.w3.org/2000/svg" pointer-events="none" width="40" height="40" style="border-radius: 20px;">
+                <defs>
+                  <linearGradient id="grad">
+                    <stop offset="0%" stop-color="#F94848"/>
+                    <stop offset="100%" stop-color="#F97D7D"/>
+                  </linearGradient>
+                </defs>
+                <rect width="50" height="50" rx="0" ry="0" fill="url(#grad)"></rect>
+                <text text-anchor="middle" y="50%" x="50%" dy="0.35em"
+                      pointer-events="auto" fill="#FFFFFF" font-family="sans-serif"
+                      style="font-weight: 400; font-size: 20px">{{ request.user.initials }}
+                </text>
+              </svg>
+              <div class="d-none d-xl-block ps-2">
+                <div>{{ request.user.get_full_name }}</div>
+                <div class="mt-1 small text-muted">{{ request.user.email }}</div>
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <form method="post" action="{% url 'oidc_logout' %}">
+                {% csrf_token %}
+                <input type="submit" class="dropdown-item" value="Sign Out">
+              </form>
+            </div>
+          </div>
+          {% else %}
+          <div class="nav-item dropdown">
+            <a href="{% url "oidc_authentication_init" %}" class="nav-link d-flex lh-1 text-reset p-0">
+              Login
+            </a>
+          </div>
+          {% endif %}
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-menu">
+          <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+            <ul class="navbar-nav">
+              {% if request.user.is_authenticated %}
+              <li class="nav-item {% if "recordings" in request.path %}active{% endif %}">
+                <a class="nav-link" href="{% url "recordings:dashboard" %}">
+                  <span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                      <line x1="8" y1="4" x2="8" y2="20"></line>
+                      <line x1="16" y1="4" x2="16" y2="20"></line>
+                      <line x1="4" y1="8" x2="8" y2="8"></line>
+                      <line x1="4" y1="16" x2="8" y2="16"></line>
+                      <line x1="4" y1="12" x2="20" y2="12"></line>
+                      <line x1="16" y1="8" x2="20" y2="8"></line>
+                      <line x1="16" y1="16" x2="20" y2="16"></line>
+                    </svg>
+                  </span>
+                  <span class="nav-link-title">
+                    Recordings
+                  </span>
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="navbar-expand-md">
+      <div class="page-wrapper" id="app">
+        {% block page_header %}
+          <div class="container-xl">
+            <!-- Page title -->
+            <div class="page-header d-print-none">
+              <div class="row align-items-center">
+                {% block page_header_title %}
+                {% endblock %}
+                {% block page_header_form %}
+                  <!-- Page title actions -->
+                  <div class="col-auto ms-auto d-print-none">
+                    <div class="input-icon">
+                      <span class="input-icon-addon">
+                      </span>
+                    </div>
+                    <div id="search-results">
+                    </div>
+                  </div>
+                {% endblock %}
+              </div>
+            </div>
+          </div>
+        {% endblock %}
+        {% block main %}{% endblock %}
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container">
+            <div class="row text-center align-items-center flex-row-reverse">
+              <div class="col-lg-auto ms-lg-auto">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    <a href="https://github.com/sorbayhq/sorbay" class="link-secondary">
+                      Documentation</a></li>
+                </ul>
+              </div>
+              <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2022
+                    <a href="https://github.com/sorbayhq/sorbay" class="link-secondary">
+                      Sorbay
+                    </a>
+                    All rights reserved. Licensed under the <a href="https://github.com/sorbayhq/sorbay/blob/master/LICENSE.txt">AGPL</a>.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  {% endblock %}
+  <div id="modal-wrapper"></div>
+</div>
+{% endblock %}
+<script src="{% static "js/apex.min.js" %}"></script>
+<script src="{% static "js/dashboard.min.js" %}"></script>
+<script src="{% static "js/custom.js" %}"></script>
+<script src="{% static "js/vue.js" %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
+<link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
+<!-- load css -->
+<link rel="stylesheet" href="//unpkg.com/videojs-record/dist/css/videojs.record.min.css">
+
+<!-- load script -->
+<script src="//unpkg.com/videojs-record/dist/videojs.record.min.js"></script>
+<script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+{% block js %}{% endblock %}
+{% block modals %}{% endblock %}
+</body>
+</html>

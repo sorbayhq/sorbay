@@ -1,0 +1,26 @@
+
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    target-branch: "master"
+
+  - package-ecosystem: "docker"
+    directory: "/docker/app/dev"
+    schedule:
+      interval: "daily"
+    target-branch: "master"
+
+  - package-ecosystem: "docker"
+    directory: "/docker/postgres"
+    schedule:
+      interval: "daily"
+    target-branch: "master"
+
+  - package-ecosystem: "docker"
+    directory: "/docker/redis"
+    schedule:
+      interval: "daily"
+    target-branch: "master"

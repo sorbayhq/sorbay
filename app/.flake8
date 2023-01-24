@@ -1,0 +1,6 @@
+[flake8]
+max-line-length = 90
+extend-ignore = E203
+exclude = */migrations/*
+per-file-ignores =
+     ./test.py: F401

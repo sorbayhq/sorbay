@@ -1,0 +1,34 @@
+{% load imgproxy %}
+
+{% if show_label %}
+  <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+{% endif %}
+
+<div class="input-group">
+  <input type="file" name="{{ field.html_name }}" class="form-control {% if field.errors %}is-invalid{% endif %}" id="{{ field.id_for_label }}"
+         aria-describedby="{{ field.id_for_label }}_feedback" placeholder=""
+         value="{% if field.value %}{{ field.value }}{% endif %}" aria-label="Upload">
+  {% if field.errors %}
+    <div id="{{ field.id_for_label }}_feedback" class="invalid-feedback">
+      {% for error in field.errors %}{{ error }}{% endfor %}
+    </div>
+  {% elif field.help_text %}
+    <small id="{{ field.id_for_label }}_feedback" class="form-text text-muted">
+      {{ field.help_text }}
+    </small>
+  {% endif %}
+</div>
+{% if field.value %}
+  <div class="row pt-3">
+    <div class="col-6">
+      <img src="{% imgproxy field.value.url width=300 height=300 %}" height="150" width="150" alt="{{ field.value }}">
+    </div>
+    <div class="col-6">
+      <input type="checkbox" name="{{ field.html_name }}-clear" id="{{ field.html_name }}-clear_id"/>
+      <label class="form-check-label" for="{{ field.html_name }}-clear_id">
+        Dieses Bild nicht mehr anzeigen
+      </label>
+    </div>
+  </div>
+  <br/>
+{% endif %}

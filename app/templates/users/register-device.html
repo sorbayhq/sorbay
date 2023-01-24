@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% load forms %}
+{% block title %}Link app{% endblock %}
+{% block body %}
+  <div class="page page-center">
+    <div class="container container-tight py-4">
+      <div class="text-center mb-4">
+        <a href="." class="navbar-brand navbar-brand-autodark">
+          <img src="{% static "images/logo.png" %}" alt="" height="36">
+        </a>
+      </div>
+      <div class="card card-md">
+        <div class="card-body text-center">
+          <div class="mb-4">
+            <h2 class="card-title">Link App</h2>
+          </div>
+          {% if form_processed %}
+            {% if success %}
+              <p class="text-muted">Thanks <strong>{{ request.user.first_name }}</strong>,
+                the <strong>{{ form.application.value }}</strong> app is now linked to
+                your account.</p>
+              <p class="text-muted">You can close this window now and continue using the
+                app. You should be logged in automatically in a couple of seconds.
+              </p>
+            {% else %}
+              <p class="text-muted">Sorry <strong>{{ request.user.first_name }}</strong>,
+                there was an error linking your app.</p>
+              <p class="text-muted">
+                Please close this window and restart the process within the app.
+              </p>
+            {% endif %}
+          {% else %}
+            <p class="text-muted">Hey <strong>{{ request.user.first_name }}</strong>, do
+              you want to link the <strong>{{ form.application.value }}</strong> app to
+              your account?
+            </p>
+            <p class="text-muted">
+              For reference, here are the details.<br/><br/>
+              Computer: {{ form.name.value }}<br/>
+              App: {{ form.application.value }}<br/>
+              Release: {{ form.release.value }}<br/><br/>
+            </p>
+            <form method="post">
+              {% csrf_token %}
+              <div class="d-none">
+                {% render_field form.token %}
+                {% render_field form.name %}
+                {% render_field form.application %}
+                {% render_field form.release %}
+              </div>
+              <input type="submit" class="btn btn-primary" value="Yes, link to account">
+            </form>
+          {% endif %}
+          <div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

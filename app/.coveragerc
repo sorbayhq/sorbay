@@ -1,0 +1,12 @@
+[run]
+omit =
+    # test files
+    tests/*
+    test.py
+    # migrations
+    */migrations/*.py
+    # settings
+    settings/*.py
+    # django
+    wsgi.py
+    manage.py

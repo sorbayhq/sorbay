@@ -1,0 +1,13 @@
+psycopg2==2.9.3
+django==4.0.2
+celery==5.1.2
+django-cryptography==1.0
+django-environ==0.8.1
+whitenoise==6.0.0
+boto3==1.24.52
+redis
+hiredis
+mozilla-django-oidc
+shortuuid
+djangorestframework
+python-keycloak

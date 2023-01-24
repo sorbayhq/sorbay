@@ -1,0 +1,21 @@
+<label class="form-check-label" for="{{ field.id_for_label }}">
+  {{ field.label }}
+</label>
+{% for value, name in field.field.choices %}
+  <div class="form-check">
+    <input name="{{ field.html_name }}" class="form-check-input {% if field.errors %}is-invalid{% endif %}" type="radio" id="
+        {{ field.id_for_label }}{{ forloop.counter0 }}">
+    <label class="form-check-label" for="{{ field.id_for_label }}{{ forloop.counter0 }}">
+      {{ name }}
+    </label>
+  </div>
+{% endfor %}
+{% if field.errors %}
+  <div id="{{ field.id_for_label }}_feedback" class="invalid-feedback">
+    {% for error in field.errors %}{{ error }}{% endfor %}
+  </div>
+{% elif field.help_text %}
+  <small id="{{ field.id_for_label }}_feedback" class="form-text text-muted">
+    {{ field.help_text }}
+  </small>
+{% endif %}

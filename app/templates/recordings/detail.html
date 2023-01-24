@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ recording.name }}{% endblock %}
+{% block main %}
+  <div class="container content">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">{{ recording.name }}</h3>
+            <div class="card-actions">
+              <a class="text-black" href="{{ recording.get_absolute_url }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+                  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+                </svg>
+              </a>
+              <span class="ms-2 copy-to-clipboard" data-clipboard="{{ recording.get_absolute_url }}" data-bs-toggle="tooltip" data-bs-placement="top" title="copy URL to clipboard">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-share" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <circle cx="6" cy="12" r="3"></circle>
+                  <circle cx="18" cy="6" r="3"></circle>
+                  <circle cx="18" cy="18" r="3"></circle>
+                  <line x1="8.7" y1="10.7" x2="15.3" y2="7.3"></line>
+                  <line x1="8.7" y1="13.3" x2="15.3" y2="16.7"></line>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <video
+                id="video-{{ recording.short_id }}"
+                class="video-js"
+                controls
+                preload="auto"
+                data-setup='{"fluid": true}'
+            >
+              <source src="{% url "recordings:playlist" recording.short_id %}" type="application/x-mpegURL"/>
+            </video>
+          </div>
+          <div class="card-footer text-black-50 small">
+            <svg style="width: 16px; height: 16px;" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <circle cx="12" cy="12" r="2"></circle>
+              <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
+            </svg>
+            <span class=""> {{ recording.view_count }}</span>
+            <span class="float-end">
+              {{ recording.created_at|naturaltime }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

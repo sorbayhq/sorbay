@@ -1,0 +1,16 @@
+<div class="form-group">
+  {% if show_label %}<label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>{% endif %}
+  <textarea name="{{ field.html_name }}" {% if not show_label %}placeholder="{{ field.label }}" {% endif %}
+    class="form-control {% if field.errors %}is-invalid{% endif %}" id="{{ field.id_for_label }}"
+    aria-describedby="{{ field.id_for_label }}_feedback" rows="3"
+    value="{% if field.value %}{{ field.value }}{% endif %}">{% if field.value %}{{ field.value }}{% endif %}</textarea>
+  {% if field.errors %}
+  <div id="{{ field.id_for_label }}_feedback" class="invalid-feedback">
+    {% for error in field.errors %}{{ error }}{% endfor %}
+  </div>
+  {% elif field.help_text %}
+  <small id="{{ field.id_for_label }}_feedback" class="form-text text-muted">
+    {{ field.help_text }}
+  </small>
+  {% endif %}
+</div>

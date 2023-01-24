@@ -1,0 +1,72 @@
+version: "3"
+
+volumes:
+  database: { }
+  s3: { }
+  data: { }
+
+services:
+  app: &app
+    build:
+      context: .
+      dockerfile: ./docker/app/dev/Dockerfile
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./app:/app:z
+      - data:/data
+    env_file:
+      - ./.envs/.dev
+    ports:
+      - "8000:8000"
+    command: "python manage.py runserver 0.0.0.0:8000"
+
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/postgres/Dockerfile
+    volumes:
+      - database:/var/lib/postgresql/data:Z
+    env_file:
+      - ./.envs/.dev
+
+  redis:
+    build:
+      context: .
+      dockerfile: ./docker/redis/Dockerfile
+    env_file:
+      - ./.envs/.dev
+
+  worker:
+    <<: *app
+    depends_on:
+      - redis
+      - db
+    ports: [ ]
+    command: celery -A settings.celery worker -l DEBUG --autoscale=1,2
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    env_file:
+      - ./.envs/.dev
+    volumes:
+      - s3:/data
+    command: server --console-address :9001 /data
+
+  keycloak:
+    build:
+      context: .
+      dockerfile: ./docker/keycloak/Dockerfile
+    volumes:
+      - ./docker/keycloak/theme:/opt/keycloak/themes/sorbay:z
+    depends_on:
+      - db
+    env_file:
+      - ./.envs/.dev
+    ports:
+      - "8080:8080"
+    command: start-dev --spi-theme-static-max-age=-1 --spi-theme-cache-themes=false --spi-theme-cache-templates=false

@@ -1,0 +1,16 @@
+<div class="form-group" class="d-none">
+  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <input type="{{ field.widget_type }}"
+         name="{{ field.html_name }}" class="form-control {% if form.errors %}is-invalid{% endif %}" id="{{ field.id_for_label }}"
+         aria-describedby="{{ field.id_for_label }}_feedback" placeholder=""
+         value="{% if field.value %}{{ field.value }}{% endif %}">
+  {% if field.errors %}
+    <div id="{{ field.id_for_label }}_feedback" class="invalid-feedback">
+      {% for error in field.errors %}{{ error }}{% endfor %}
+    </div>
+  {% elif field.help_text %}
+    <small id="{{ field.id_for_label }}_feedback" class="form-text text-muted">
+      {{ field.help_text }}
+    </small>
+  {% endif %}
+</div>

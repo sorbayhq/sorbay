@@ -1,0 +1,19 @@
+<form method="post" {% if action %}action="{{ action }}"{% endif %} enctype='multipart/form-data' novalidate>
+  {% if form.non_field_errors %}
+    <div class="mb-3">
+    {% for error in form.non_field_errors %}
+      <div class="text-danger">{{ error }}</div>
+    {% endfor %}
+    </div>
+  {% endif %}
+  {% csrf_token %}
+  {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+  {% endfor %}
+  {% for field in form.visible_fields %}
+    {% include "forms/field.html" %}
+  {% endfor %}
+  <div class="pt-1">
+    <input type="submit" class="btn btn-primary w-100" value="{{ submit_btn }}">
+  </div>
+</form>

@@ -1,0 +1,15 @@
+<div class="{% if field_margin %}{{ field_margin }}{% endif %}">
+  {% if field.widget_type in "text,password,number,url,email,time" %}
+  {% include "forms/fields/text,password,number,url,email,time.html" %}
+  {% elif field.widget_type == "checkbox" %}
+  {% include "forms/fields/checkbox.html" %}
+  {% elif field.widget_type in "select,nullbooleanselect" %}
+  {% include "forms/fields/select,nullbooleanselect.html" %}
+  {% elif field.widget_type == "textarea" %}
+  {% include "forms/fields/textarea.html" %}
+  {% elif field.widget_type == "radioselect" %}
+  {% include "forms/fields/radioselect.html" %}
+  {% elif field.widget_type == "clearablefile" %}
+  {% include "forms/fields/clearablefile.html" %}
+  {% endif %}
+</div>
