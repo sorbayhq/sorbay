@@ -5,7 +5,7 @@ from .base import *
 from .constants import ENVS
 
 ENV = ENVS.DEV
-HOST = "http://0.0.0.0:8000"
+HOST = "http://localhost:8000"
 ########################################
 # DEBUG TOOLBAR
 ########################################
