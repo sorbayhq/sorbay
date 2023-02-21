@@ -37,10 +37,28 @@ brew reinstall --cask docker.rb
 
 ## Errors when running the setup.
 
-**Q:** When I run `setup`-script, I get the following error:
+**Q:** When I run the `setup`-script, I get the following error:
 
 ```
 debconf: delaying package configuration, since apt-utils is not installed
 ```
 
 **A:** It's not really an error, and it's okay to ignore it.
+
+**Q:** I am on Windows, and when I run the `setup`-script, I get the following error:
+
+```
+failed to get console mode for stdin: The handle is invalid.
+```
+
+**A:** It does not really cause any problem, you can ignore it.
+
+**Q:** I get a lot python Traceback errors, and the last line of those Tracebacks look like this:
+
+```
+Failed to establish a new connection: [Errno -3] Temporary failure in name resolution
+FATAL:  password authentication failed for user "sorbay"
+```
+
+**A:** You need to delete the old containers and their volumes on docker first before relaunching the setup.
+When you delete the sorbay docker containrs and their volumes, then relaunching the setup, then it should work fine.
