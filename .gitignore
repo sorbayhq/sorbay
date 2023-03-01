@@ -225,9 +225,6 @@ Temporary Items
 # proportion of contributors will probably not be using Sublime Text
 # *.sublime-project
 
-# SFTP configuration file
-sftp-config.json
-
 # Package control specific files
 Package Control.last-run
 Package Control.ca-list
