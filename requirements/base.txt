@@ -1,5 +1,5 @@
 psycopg2==2.9.3
-django==4.0.2
+django==4.1.7
 celery==5.1.2
 django-cryptography==1.0
 django-environ==0.8.1
