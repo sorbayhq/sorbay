@@ -9,7 +9,7 @@ Quickly create and share screen and camera recordings.
 The project comes in two parts: 
 
 - The backend service to store, organize and share recordings (this project)
-- Client](https://github.com/sorbayhq/sorbay-client) for Windows, macOS and Linux to do the actual recordings
+- [Client](https://github.com/sorbayhq/sorbay-client) for Windows, macOS and Linux to do the actual recordings
 
 ## Setup
 
