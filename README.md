@@ -9,7 +9,7 @@ Quickly create and share screen and camera recordings.
 The project comes in two parts: 
 
 - The backend service to store, organize and share recordings (this project)
-- [client](https://github.com/sorbayhq/sorbay-client) for Windows, macOS and Linux to do the actual recordings
+- Client](https://github.com/sorbayhq/sorbay-client) for Windows, macOS and Linux to do the actual recordings
 
 ## Setup
 
@@ -48,7 +48,7 @@ point it to your local backend service at `http://localhost:8000/` during setup.
 
 ## Hosted Sorbay
 We are currently working on a hosted backend service called 
-[Sorbay Cloud](https://sorbay.io/), due to release in Q1 2023. Make sure to join the 
+[Sorbay Cloud](https://sorbay.io/), due to release in Q2 2023. Make sure to join the 
 waitlist to get notified once we are ready.
 
 Sorbay Cloud will allow you to get up and running in a couple of minutes. Instead of
@@ -58,8 +58,7 @@ record your first video.
 ## State of the project
 
 Sorbay is in its very early stages. Consider it an alpha that shouldn't be running in
-production just yet. Our goal was to release Sorbay with a working minimalized featureset
-and then add more and more features later on.
+production just yet. We currently working on adding new features.
 
 ## Help, bugs & discussion
 If you encounter any bugs up an issue in this repository. If you need help or want to chat about
