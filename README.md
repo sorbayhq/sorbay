@@ -58,7 +58,7 @@ record your first video.
 ## State of the project
 
 Sorbay is in its very early stages. Consider it an alpha that shouldn't be running in
-production just yet. We currently working on adding new features.
+production just yet. We are currently working on additional features and these will be influenced by feedback from the community.
 
 ## Help, bugs & discussion
 If you encounter any bugs up an issue in this repository. If you need help or want to chat about
