@@ -4,7 +4,12 @@
 
 # Open Source Loom alternative
 
-Quickly create and share screen and camera recordings. The project comes in two parts: The backend service to store, organize and share recordings (this project) and a [client](https://github.com/sorbayhq/sorbay-client) for Windows, macOS and Linux to do the actual recordings.
+Quickly create and share screen and camera recordings. 
+
+The project comes in two parts: 
+
+- The backend service to store, organize and share recordings (this project)
+- [client](https://github.com/sorbayhq/sorbay-client) for Windows, macOS and Linux to do the actual recordings
 
 ## Setup
 
