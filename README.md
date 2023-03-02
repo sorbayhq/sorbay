@@ -2,13 +2,11 @@
     <img width="33%" src="app/static/images/logo.png">
 </p>
 
-# About
+# Open Source Loom alternative
 
-Sorbay is an Open Source alternative to Loom. It allows you to quickly create and share 
-screen- and camera recordings. The project comes in two parts: The backend 
-service to store, organize and share recordings (this project) and a 
-[client](https://github.com/sorbayhq/sorbay-client) for Windows, macOS and Linux to do 
-the actual recordings.
+## About
+
+Quickly create and share screen and camera recordings. The project comes in two parts: The backend service to store, organize and share recordings (this project) and a [client](https://github.com/sorbayhq/sorbay-client) for Windows, macOS and Linux to do the actual recordings.
 
 ## Setup
 
