@@ -46,6 +46,11 @@ redirected to a "Sign In" page. Click on "register" at the bottom to create an a
 You can now download the [client](https://github.com/sorbayhq/sorbay-client). Make sure to
 point it to your local backend service at `http://localhost:8000/` during setup.
 
+## Leave a star
+Consider leaving a star on this Github repository if you think what we are building is 
+useful or might be useful at some point. We are in our very early stages and we don't
+collect any telemetry. Getting a star is the only viable metric for us to gauge interest.
+
 ## Hosted Sorbay
 We are currently working on a hosted backend service called 
 [Sorbay Cloud](https://sorbay.io/), due to release in Q2 2023. Make sure to join the 
@@ -61,6 +66,6 @@ Sorbay is in its very early stages. Consider it an alpha that shouldn't be runni
 production just yet. We are currently working on additional features and these will be influenced by feedback from the community.
 
 ## Help, bugs & discussion
-If you encounter any bugs up an issue in this repository. If you need help or want to chat about
+If you encounter any bugs open up an issue in this repository. If you need help or want to chat about
 the project, join our 
 [Slack](https://join.slack.com/t/slack-oso6527/shared_invite/zt-1qd8gm543-KGdb5gD4WqikZEKEk8sSTA) channel.
