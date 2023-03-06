@@ -18,6 +18,9 @@ class RecordingPlayListView(View):
     content_type = "application/vnd.apple.mpegurl"
     http_method_names = ['get', 'options']
 
+    def is_user_agent_safari(self, request):
+        return "safari" in request.headers.get("User-Agent", "").lower()
+
     def get(self, request, *args, **kwargs):
         recording = get_object_or_404(
             Recording,
@@ -33,8 +36,10 @@ class RecordingPlayListView(View):
         m3u8 += "#EXT-X-MEDIA-SEQUENCE:0\n"
         m3u8 += "#EXT-X-PLAYLIST-TYPE:VOD\n"
         # todo: EXT-X-DISCONTINUITY seems to not be working on Safari. Leaving it out
-        # renders the stream unusable on Firefox/Chrome. Leave this out for now
-        m3u8 += "#EXT-X-DISCONTINUITY\n"
+        # renders the stream unusable on Firefox/Chrome.
+        # Therefore remove EXT-X-DISCONTINUITY if the user's browser is Safari.
+        if not self.is_user_agent_safari(request):
+            m3u8 += "#EXT-X-DISCONTINUITY\n"
         for chunk in sorted(recording.chunks, key=lambda c: c['position']):
             m3u8 += "\n"
             # this sets the offset for the current chunk. This, however
