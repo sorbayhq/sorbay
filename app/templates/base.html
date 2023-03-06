@@ -158,15 +158,9 @@
 <script src="{% static "js/dashboard.min.js" %}"></script>
 <script src="{% static "js/custom.js" %}"></script>
 <script src="{% static "js/vue.js" %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
-<link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
-<!-- load css -->
-<link rel="stylesheet" href="//unpkg.com/videojs-record/dist/css/videojs.record.min.css">
-
-<!-- load script -->
-<script src="//unpkg.com/videojs-record/dist/videojs.record.min.js"></script>
-<script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+<script src="{% static "js/axios.min.js" %}"></script>
+<script src="{% static "js/video.min.js" %}"></script>
+<link href="{% static "css/video-js.css" %}" rel="stylesheet" />
 {% block js %}{% endblock %}
 {% block modals %}{% endblock %}
 </body>
