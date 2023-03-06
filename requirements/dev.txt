@@ -9,4 +9,4 @@ pytest-mock==3.7.0
 flake8==3.9.2 # don't upgrade
 flake8-print==4.0.0
 pytest-cov==3.0
-pytest-recording==0.12.0
+pytest-recording==0.12.2
