@@ -7,7 +7,7 @@ from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views import View
-from django.views.generic import TemplateView, DetailView, UpdateView
+from django.views.generic import TemplateView, UpdateView
 
 from recordings.models import Recording, View as RecordingView
 
