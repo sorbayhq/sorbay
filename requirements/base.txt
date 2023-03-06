@@ -1,4 +1,4 @@
-psycopg2==2.9.3
+psycopg2==2.9.5
 django==4.1.7
 celery==5.1.2
 django-cryptography==1.1
