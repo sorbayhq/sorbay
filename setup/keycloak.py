@@ -4,16 +4,27 @@ meant to be run during the setup process and heavily relies on the environment t
 correctly.
 """
 import os
+import time
 from django.conf import settings
 from keycloak import KeycloakAdmin
+from keycloak.exceptions import KeycloakConnectionError
 
-keycloak_admin = KeycloakAdmin(
-    server_url="http://keycloak:8080/",
-    username=os.environ['KEYCLOAK_ADMIN'],
-    password=os.environ['KEYCLOAK_ADMIN_PASSWORD'],
-    realm_name="master",
-    verify=True
-)
+is_setup_ready = False
+
+while not is_setup_ready:
+    try:
+        keycloak_admin = KeycloakAdmin(
+            server_url="http://keycloak:8080/",
+            username=os.environ['KEYCLOAK_ADMIN'],
+            password=os.environ['KEYCLOAK_ADMIN_PASSWORD'],
+            realm_name="master",
+            verify=True
+        )
+    except KeycloakConnectionError:
+        print("waiting for the keycloak setup")
+        time.sleep(3)
+        continue
+    is_setup_ready = True
 keycloak_admin.create_realm(payload={
     "id": "dev",
     "realm": "dev",
