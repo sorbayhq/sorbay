@@ -1,4 +1,3 @@
-from tempfile import NamedTemporaryFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import io
 import os
