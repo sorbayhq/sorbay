@@ -1,6 +1,6 @@
 -r base.txt
 black==21.10b0
-pytest==6.2.5
+pytest==7.2.2
 pytest-django==4.4.0
 pytest-flake8==1.0.7
 flake8==3.9.2
