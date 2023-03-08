@@ -108,3 +108,12 @@ class RecordingDetailView(UpdateView):
         # on the database significantly
         Recording.objects.filter(pk=recording.pk).update(view_count=F("view_count") + 1)
         return recording
+    
+    # todo: complete this implementation
+    # def delete(self, request, *args, **kwargs):
+    #     recording = get_object_or_404(
+    #         Recording,
+    #         short_id=self.kwargs['short_id']
+    #     )
+    #     recording.delete()
+    #     return redirect(reverse)
