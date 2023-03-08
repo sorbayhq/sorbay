@@ -33,3 +33,7 @@ def test_device_register_view(client, user):
     response = client.get(test_url)
     assert response.status_code == 302
     assert authentication_url in response.headers["Location"]
+
+    client.force_login(user)
+    response = client.get(test_url)
+    assert response.status_code == 200
