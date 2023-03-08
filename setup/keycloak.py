@@ -1,3 +1,8 @@
+"""
+The intended use for this code is to set up Keycloak in the development environment. It is
+meant to be run during the setup process and heavily relies on the environment to be set 
+correctly.
+"""
 import os
 from django.conf import settings
 from keycloak import KeycloakAdmin

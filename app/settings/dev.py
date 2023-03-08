@@ -6,6 +6,7 @@ from .constants import ENVS
 
 ENV = ENVS.DEV
 HOST = "http://localhost:8000"
+DEBUG = True
 ########################################
 # DEBUG TOOLBAR
 ########################################

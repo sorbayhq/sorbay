@@ -2,13 +2,14 @@
     <img width="33%" src="app/static/images/logo.png">
 </p>
 
-# About
+# Open Source Loom alternative
 
-Sorbay is an Open Source alternative to Loom. It allows you to quickly create and share 
-screen- and camera recordings. The project consists of two parts: The backend 
-service to store, organize and share recordings (this project) and a 
-[client](https://github.com/sorbayhq/sorbay-client) for Windows, macOS and Linux to do 
-the actual recordings.
+Quickly create and share screen and camera recordings. 
+
+The project comes in two parts: 
+
+- The backend service to store, organize and share recordings (this project)
+- [Client](https://github.com/sorbayhq/sorbay-client) for Windows, macOS and Linux(soon) to do the actual recordings
 
 ## Setup
 
@@ -45,9 +46,14 @@ redirected to a "Sign In" page. Click on "register" at the bottom to create an a
 You can now download the [client](https://github.com/sorbayhq/sorbay-client). Make sure to
 point it to your local backend service at `http://localhost:8000/` during setup.
 
+## Leave a star
+Consider leaving a star on this Github repository if you think what we are building is 
+useful or might be useful at some point. We are in our very early stages and we don't
+collect any telemetry. Getting a star is the only viable metric for us to gauge interest.
+
 ## Hosted Sorbay
 We are currently working on a hosted backend service called 
-[Sorbay Cloud](https://sorbay.io/), due to release in Q1 2023. Make sure to join the 
+[Sorbay Cloud](https://sorbay.io/), due to release in Q2 2023. Make sure to join the 
 waitlist to get notified once we are ready.
 
 Sorbay Cloud will allow you to get up and running in a couple of minutes. Instead of
@@ -57,10 +63,9 @@ record your first video.
 ## State of the project
 
 Sorbay is in its very early stages. Consider it an alpha that shouldn't be running in
-production just yet. Our goal was to release Sorbay with a working minimalized featureset
-and then add more and more features later on.
+production just yet. We are currently working on additional features and these will be influenced by feedback from the community.
 
 ## Help, bugs & discussion
-If you encounter any bugs up an issue in this repository. If you need help or want to chat about
+If you encounter any bugs open up an issue in this repository. If you need help or want to chat about
 the project, join our 
-[Slack](https://join.slack.com/t/sorbay/shared_invite/zt-1m3nio46o-ERrjXDNgSLr_ToklzUfFtw) channel.
+[Slack](https://join.slack.com/t/slack-oso6527/shared_invite/zt-1qd8gm543-KGdb5gD4WqikZEKEk8sSTA) channel.

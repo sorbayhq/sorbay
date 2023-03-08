@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load forms %}
 {% load humanize %}
 {% block title %}{{ recording.name }}{% endblock %}
 {% block main %}
@@ -7,15 +8,34 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">{{ recording.name }}</h3>
+            <h3 class="card-title" v-if="!isEditingName">{{ recording.name }}</h3>
+            {% if editable %}
+            <form v-if="isEditingName" method="post">
+              {% csrf_token %}
+              <div class="pt-2">
+                <div class="d-inline-block">
+                  <div class="">
+                    {% render_field form.name show_label=False %}
+                  </div>
+                </div>
+                <div class="d-inline-block">
+                  <div class="mb-3" style="margin-top:-3px;">
+                    <input class="btn btn-primary" type="submit" value="Save">
+                  </div>
+                </div>
+              </div>
+            </form>
+            {% endif %}
             <div class="card-actions">
-              <a class="text-black" href="{{ recording.get_absolute_url }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
-                  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
-                </svg>
-              </a>
+              {% if editable %}
+                <span v-on:click="isEditingName=true" class="text-black" href="{{ recording.get_absolute_url }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+                  </svg>
+                </span>
+              {% endif %}
               <span class="ms-2 copy-to-clipboard" data-clipboard="{{ recording.get_absolute_url }}" data-bs-toggle="tooltip" data-bs-placement="top" title="copy URL to clipboard">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-share" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -95,4 +115,19 @@
     </div>
   </div>
 
+{% endblock %}
+
+{% block js %}
+  <script type="text/javascript">
+      const app = new Vue({
+              el: '#app',
+              delimiters: ['[[', ']]'],
+              data: {
+                  isEditingName: false
+              },
+              mounted() {
+              }
+          }
+      );
+  </script>
 {% endblock %}

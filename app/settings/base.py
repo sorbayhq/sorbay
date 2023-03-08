@@ -52,7 +52,7 @@ MIDDLEWARE = [
 # SECURITY
 ########################################
 SECRET_KEY = env("SECRET_KEY")
-DEBUG = env("DJANGO_DEBUG")
+DEBUG = False
 ALLOWED_HOSTS = []
 
 ########################################

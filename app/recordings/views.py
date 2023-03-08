@@ -2,11 +2,12 @@ import decimal
 from decimal import Decimal
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.db.models import F
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views import View
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, UpdateView
 
 from recordings.models import Recording, View as RecordingView
 
@@ -62,7 +63,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         return data
 
 
-class RecordingDetailView(DetailView):
+class RecordingDetailView(UpdateView):
     """View that represents the detail view of a video.
 
     Creates a `recordings.models.View` object and updates the `view_count` of a
@@ -70,6 +71,23 @@ class RecordingDetailView(DetailView):
     model = Recording
     context_object_name = "recording"
     template_name = "recordings/detail.html"
+    fields = ("name",)
+
+    def get_context_data(self, **kwargs):
+        data = super(RecordingDetailView, self).get_context_data(**kwargs)
+        data['editable'] = self.has_permission_to_edit
+        return data
+
+    def form_valid(self, form):
+        if not self.has_permission_to_edit:
+            raise PermissionDenied
+        form.save()
+        return redirect(self.object.get_absolute_url())
+
+    @property
+    def has_permission_to_edit(self):
+        return self.object.org == self.request.user.org \
+            if self.request.user.is_authenticated else False
 
     def get_object(self, queryset=None):
         recording = get_object_or_404(

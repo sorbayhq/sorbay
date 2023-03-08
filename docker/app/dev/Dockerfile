@@ -11,6 +11,7 @@ RUN apt-get update \
   # ffmpeg
   && apt-get install -y ffmpeg \
   # socat, strictly fo dev purposes to make keycloak available locally
+  # ========= DON'T USE IN PRODUCTION =========
   && apt-get install -y socat \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
