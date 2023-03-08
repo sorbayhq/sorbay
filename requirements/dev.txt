@@ -5,7 +5,7 @@ pytest-django==4.4.0
 pytest-flake8==1.0.7
 flake8==3.9.2
 django-debug-toolbar==3.8.1
-pytest-mock==3.7.0
+pytest-mock==3.10.0
 flake8==3.9.2 # don't upgrade
 flake8-print==5.0.0
 pytest-cov==4.0.0
