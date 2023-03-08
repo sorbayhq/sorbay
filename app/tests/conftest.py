@@ -1,5 +1,6 @@
 import pytest
 
+from recordings.models import Recording
 from users.models import User
 from organisations.models import Organisation
 
@@ -15,4 +16,14 @@ def user(org):
         username="testuser",
         password="testpass",
         org=org
+    )
+
+
+@pytest.fixture
+def recording(org, user):
+    return Recording.objects.create(
+        name="recording",
+        org=org,
+        uploaded_by=user,
+        is_uploaded=True
     )
