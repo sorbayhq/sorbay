@@ -37,7 +37,7 @@ setup\setup.cmd
 
 Once everything is set up, run the stack.
 ```shell
-docker-compose up
+docker compose up
 ```
 
 The backend service should now be running at 
