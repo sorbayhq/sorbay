@@ -2,7 +2,7 @@ from django.urls import path
 
 from recordings.views import DashboardView, RecordingDetailView, RecordingPlayListView
 
-app_name = "users"
+app_name = "recordings"
 urlpatterns = [
   path("", DashboardView.as_view(), name="dashboard"),
   path("<str:short_id>/", RecordingDetailView.as_view(), name="detail"),

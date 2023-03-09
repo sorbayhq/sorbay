@@ -1,10 +1,93 @@
 import base64
 import json
 
+from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
-from django.views.generic import TemplateView, FormView
-from users.forms import RegisterDeviceForm
+from django.core.exceptions import ValidationError
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, FormView, UpdateView
+from users.forms import (
+    RegisterDeviceForm,
+    UserNameUpdateForm,
+    UserEmailUpdateForm,
+    UserPasswordUpdateForm,
+)
+from sorbay.keycloak import KeycloakAPI
+
+
+class UpdateUserNameView(LoginRequiredMixin, UpdateView):
+    template_name = "users/update-name.html"
+    form_class = UserNameUpdateForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        first_name = user.first_name
+        last_name = user.last_name
+        payload = {'firstName': first_name, 'lastName': last_name}
+        keycloakAPI = KeycloakAPI()
+        keycloak_admin = keycloakAPI.keycloak_admin
+        keycloak_admin.refresh_token()
+        response = keycloak_admin.update_user(user_id=user.username, payload=payload)
+        if response:
+            raise ValidationError("An error occured, please try again later...")
+        form.save(commit=True)
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse("users:settings")
+
+
+class UpdateUserEmailView(LoginRequiredMixin, UpdateView):
+    template_name = "users/update-email.html"
+    form_class = UserEmailUpdateForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        email = user.email
+        payload = {'username': email, 'email': email}
+        keycloakAPI = KeycloakAPI()
+        keycloak_admin = keycloakAPI.keycloak_admin
+        keycloak_admin.refresh_token()
+        response = keycloak_admin.update_user(user_id=user.username, payload=payload)
+        if response:
+            raise ValidationError("An error occured, please try again later...")
+        form.save(commit=True)
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse("users:settings")
+
+
+class UpdateUserPasswordView(LoginRequiredMixin, UpdateView):
+    template_name = "users/update-password.html"
+    form_class = UserPasswordUpdateForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        password = form.data['new_password1']
+        keycloakAPI = KeycloakAPI()
+        keycloak_admin = keycloakAPI.keycloak_admin
+        keycloak_admin.refresh_token()
+        response = keycloak_admin.set_user_password(
+            user_id=user.username,
+            password=password,
+            temporary=False
+        )
+        if response:
+            raise ValidationError("An error occured, please try again later...")
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse("users:settings")
 
 
 class SettingsView(LoginRequiredMixin, TemplateView):

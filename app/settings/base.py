@@ -198,6 +198,14 @@ OIDC_OP_LOGOUT_ENDPOINT = env("OIDC_OP_LOGOUT_ENDPOINT")
 OIDC_OP_LOGOUT_URL_METHOD = 'sorbay.auth_backend.provider_logout'
 
 ########################################
+# KEYCLOAK
+########################################
+KEYCLOAK_URL = env("DJANGO_KEYCLOAK_URL")
+KEYCLOAK_REALM = env("DJANGO_KEYCLOAK_REALM")
+KEYCLOAK_ADMIN_USER = env("KEYCLOAK_ADMIN")
+KEYCLOAK_ADMIN_PASSWORD = env("KEYCLOAK_ADMIN_PASSWORD")
+
+########################################
 # DJANGO REST FRAMEWORK
 ########################################
 REST_FRAMEWORK = {

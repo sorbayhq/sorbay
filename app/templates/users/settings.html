@@ -1,3 +1,60 @@
 {% extends "base.html" %}
 
 {% block title %}Settings{% endblock %}
+
+{% block page_header %}
+  <div class="container-xl">
+    <div class="page-header d-print-none pb-3">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <!-- Page pre-title -->
+          <div class="page-pretitle">
+            User
+          </div>
+          <h2 class="page-title">
+            Settings
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+<div class="card col-8 align-self-center">
+	<div class="row g-0">
+		<div class="col-3 d-none d-md-block border-end">
+			<div class="card-body">
+				<h4 class="subheader">User Settings</h4>
+
+				<div class="list-group list-group-transparent">
+					<a href="{% url "users:updatenames" %}" class="list-group-item list-group-item-action d-flex align-items-center">Update The Names</a>
+					<a href="{% url "users:updateemail" %}" class="list-group-item list-group-item-action d-flex align-items-center">Update The email</a>
+					<a href="{% url "users:updatepassword" %}" class="list-group-item list-group-item-action d-flex align-items-center">Update the Password</a>
+				</div>
+			</div>
+            <div class="card-body">
+				<h4 class="subheader">Recording</h4>
+
+				<div class="list-group list-group-transparent">
+					<a href="#example" class="list-group-item list-group-item-action d-flex align-items-center">Recording settings</a>
+					<a href="#example" class="list-group-item list-group-item-action d-flex align-items-center">List Of Devices</a>
+				</div>
+			</div>
+		</div>
+        {% if view.template_name == 'users/settings.html' %}
+        <div class="col d-flex align-items-center justify-content-center">
+        {% else %}
+        <div class="col d-flex flex-column">
+        {% endif %}
+			{% block content_settings %}
+                
+                <div class="col-4 mb-3 align-self-center d-flex align-self-center justify-content-center">
+                    <div class="cursor-not-allowed bg-light py-3">Select the settings you want</div>
+                </div>
+            {% endblock %}
+
+		</div>
+	</div>
+</div>
+{% endblock main %}

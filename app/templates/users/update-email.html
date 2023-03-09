@@ -1,0 +1,12 @@
+{% extends "users/settings.html" %}
+{% load forms %}
+
+{% block title %}Update User's Email{% endblock title %}
+
+{% block content_settings %}
+<div class="card-body">
+	<h2 class="mb-4">My Email</h2>
+    {% url "users:updateemail" as action %}
+    {% render_form form=form submit_btn="Submit" action=action %}
+</div>
+{% endblock content_settings %}
