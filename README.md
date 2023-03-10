@@ -2,7 +2,7 @@
     <img width="33%" src="app/static/images/logo.png">
 </p>
 
-# Open source asynchronous video communication
+# Open source asynchronous video communication tool
 
 Quickly create and share screen and camera recordings. 
 
