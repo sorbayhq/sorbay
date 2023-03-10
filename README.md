@@ -2,7 +2,7 @@
     <img width="33%" src="app/static/images/logo.png">
 </p>
 
-# Open Source Loom alternative
+# Open source asynchronous video communication
 
 Quickly create and share screen and camera recordings. 
 
