@@ -55,6 +55,9 @@
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <a class="navbar-brand" href="{% url "users:settings" %}">
+                <input type="submit" class="dropdown-item" value="Settings">
+              </a>
               <form method="post" action="{% url 'oidc_logout' %}">
                 {% csrf_token %}
                 <input type="submit" class="dropdown-item" value="Sign Out">
